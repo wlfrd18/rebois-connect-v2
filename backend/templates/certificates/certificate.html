@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { font-family: Georgia, serif; background: #fff; color: #1a1a1a; }
+  .certificate { border: 8px double #2d5a27; padding: 40px; margin: 20px; text-align: center; }
+  .logo   { font-size: 28px; font-weight: bold; color: #2d5a27; margin-bottom: 5px; }
+  .title  { font-size: 22px; color: #2d5a27; margin: 20px 0; text-transform: uppercase; letter-spacing: 3px; }
+  .co2    { font-size: 48px; font-weight: bold; color: #2d5a27; margin: 20px 0; }
+  .detail { font-size: 13px; margin: 8px 0; }
+  .serial { font-size: 11px; color: #999; margin-top: 30px; }
+  .standard { background: #2d5a27; color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; }
+  .hash   { font-size: 9px; color: #ccc; margin-top: 20px; word-break: break-all; }
+</style>
+</head>
+<body>
+<div class="certificate">
+  <div class="logo">🌱 Rebois Connect</div>
+  <div class="title">Certificat d'Impact Carbone</div>
+
+  <p>Ce certificat atteste que</p>
+  <p style="font-size:18px; font-weight:bold;">{{ mecene.get_full_name|default:mecene.username }}</p>
+  <p>a contribué au financement d'un projet de reforestation</p>
+  <p style="font-size:14px; font-weight:bold;">{{ cert.project_title }}</p>
+  <p>{{ cert.project_country }}{% if cert.project_region %}, {{ cert.project_region }}{% endif %}</p>
+
+  <div class="co2">{{ cert.co2_tons_certified }} t CO₂</div>
+  <p>séquestrées sur 30 ans</p>
+
+  <div style="margin: 20px 0;">
+    <span class="standard">{{ cert.get_standard_display }}</span>
+  </div>
+
+  <div class="detail">Surface reboisée : {{ cert.surface_hectares }} hectares</div>
+  <div class="detail">Investissement : {{ cert.investment_amount }} {{ cert.currency }}</div>
+  <div class="detail">Quote-part : {{ cert.co2_share_percent }}% du projet</div>
+  <div class="detail">Période : {{ cert.start_date|date:"Y" }} – {{ cert.end_date|date:"Y" }}</div>
+  <div class="detail">Émis le : {{ cert.issued_at|date:"d/m/Y" }}</div>
+
+  <div class="serial">N° {{ cert.serial_number }}</div>
+  {% if cert.registry_reference %}
+  <div class="serial">Registre : {{ cert.registry_reference }}</div>
+  {% endif %}
+  <div class="hash">SHA256 : {{ cert.certificate_hash }}</div>
+</div>
+</body>
+</html>

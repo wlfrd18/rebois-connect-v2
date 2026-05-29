@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { font-family: Arial, sans-serif; font-size: 12px; color: #333; }
+  h1   { text-align: center; color: #2d5a27; font-size: 18px; }
+  h2   { color: #2d5a27; font-size: 14px; border-bottom: 1px solid #ccc; }
+  .header { text-align: center; margin-bottom: 30px; }
+  .logo   { font-size: 24px; font-weight: bold; color: #2d5a27; }
+  .section { margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; }
+  td, th { border: 1px solid #ddd; padding: 8px; }
+  th { background: #f5f5f5; }
+  .signatures { margin-top: 50px; }
+  .sig-box { border: 1px solid #ccc; padding: 20px; width: 30%; display: inline-block; }
+  .footer { margin-top: 30px; font-size: 10px; color: #999; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">🌱 Rebois Connect</div>
+  <h1>CONTRAT DE REFORESTATION TRIPARTITE</h1>
+  <p>Référence : {{ contract.id }}</p>
+  <p>Date de génération : {{ contract.created_at|date:"d/m/Y" }}</p>
+</div>
+
+<div class="section">
+  <h2>1. PROJET</h2>
+  <table>
+    <tr><th>Projet</th><td>{{ contract.project_title }}</td></tr>
+    <tr><th>Budget total</th><td>{{ contract.total_budget }} {{ contract.currency }}</td></tr>
+    <tr><th>Durée</th><td>{{ contract.duration_months }} mois</td></tr>
+    <tr><th>CO₂ estimé</th><td>{{ contract.co2_estimated_tons }} tonnes</td></tr>
+    <tr><th>Commission plateforme</th><td>{{ contract.platform_fee_percent }}%</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>2. PARTIES</h2>
+  <table>
+    <tr><th>Volontaire (propriétaire terrain)</th><td>{{ volontaire.get_full_name }} — {{ volontaire.email }}</td></tr>
+    <tr><th>Structure technique</th><td>{{ structure.organization_name }} — {{ structure.email }}</td></tr>
+    <tr><th>Plateforme</th><td>Rebois Connect — {{ admin.email }}</td></tr>
+  </table>
+  {% if mecenes %}
+  <h2>Mécènes co-financeurs</h2>
+  <table>
+    <tr><th>Mécène</th><th>Montant</th><th>Part CO₂</th></tr>
+    {% for mecene in mecenes %}
+    <tr>
+      <td>{{ mecene.get_full_name }}</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+
+<div class="section">
+  <h2>3. CONDITIONS</h2>
+  <p>Les parties s'engagent à respecter les conditions suivantes :</p>
+  <ul>
+    <li>Le Volontaire met à disposition le terrain identifié pour une durée de {{ contract.duration_months }} mois.</li>
+    <li>La Structure technique réalise les travaux de reforestation conformément au plan validé.</li>
+    <li>Les paiements sont débloqués par milestone validé par Rebois Connect.</li>
+    <li>Les certificats CO₂ sont émis au prorata de la contribution de chaque Mécène.</li>
+    <li>Tout litige est soumis à arbitrage selon les lois du pays du projet.</li>
+  </ul>
+</div>
+
+<div class="signatures">
+  <h2>4. SIGNATURES</h2>
+  <table>
+    <tr>
+      <td style="padding:20px; text-align:center;">
+        <p><strong>Le Volontaire</strong></p>
+        <p>{{ volontaire.get_full_name }}</p>
+        <br><br>
+        <p>Signature : ___________________</p>
+        <p>Date : ___________________</p>
+      </td>
+      <td style="padding:20px; text-align:center;">
+        <p><strong>La Structure technique</strong></p>
+        <p>{{ structure.organization_name }}</p>
+        <br><br>
+        <p>Signature : ___________________</p>
+        <p>Date : ___________________</p>
+      </td>
+      <td style="padding:20px; text-align:center;">
+        <p><strong>Rebois Connect</strong></p>
+        <p>Administrateur plateforme</p>
+        <br><br>
+        <p>Signature : ___________________</p>
+        <p>Date : ___________________</p>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="footer">
+  <p>Document généré automatiquement par Rebois Connect — Hash d'intégrité SHA256 : {{ contract.document_hash }}</p>
+  <p>Ce document est confidentiel et destiné uniquement aux parties signataires.</p>
+</div>
+
+</body>
+</html>
