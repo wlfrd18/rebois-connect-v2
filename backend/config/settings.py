@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "geo",
     "weather",
     "adminpanel",
+    "drf_spectacular"
 ]
 
 MIDDLEWARE = [
@@ -138,6 +139,7 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 12,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     # Throttling : anti brute-force
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.AnonRateThrottle",
@@ -223,3 +225,42 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL   = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# ── Documentation API OpenAPI/Swagger ─────────────────────────
+SPECTACULAR_SETTINGS = {
+    "TITLE":       "Rebois Connect API",
+    "DESCRIPTION": """
+## API Rebois Connect — Plateforme mondiale de reforestation
+
+Connecte propriétaires fonciers (Volontaires), investisseurs environnementaux (Mécènes),
+et structures techniques de reforestation dans un écosystème de confiance.
+
+### Authentification
+Toutes les routes protégées nécessitent un token JWT dans le header :
+```
+Authorization: Bearer <access_token>
+```
+
+Obtenir un token : `POST /api/v1/auth/login/`
+
+### Rôles
+- **Volontaire** : soumet des terrains à reboiser
+- **Mécène** : finance des projets, reçoit des certificats CO₂
+- **Structure** : réalise les travaux, upload les preuves
+- **Admin** : valide, orchestre, débloque les paiements
+
+### Sécurité
+- JWT avec rotation automatique des refresh tokens
+- RBAC granulaire par rôle et KYC
+- Rate limiting : 20 req/min (anonyme), 100 req/min (authentifié)
+    """,
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "COMPONENT_SPLIT_REQUEST": True,
+    "SCHEMA_PATH_PREFIX": "/api/v1/",
+    "SECURITY": [{"jwtAuth": []}],
+    "SWAGGER_UI_SETTINGS": {
+        "persistAuthorization": True,
+        "displayRequestDuration": True,
+    },
+}
