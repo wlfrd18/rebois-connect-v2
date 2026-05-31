@@ -113,7 +113,7 @@ jobs:
           MINIO_SECRET_KEY: minioadmin
         run: |
           cd backend
-          python manage.py test --verbosity=2
+          DJANGO_SETTINGS_MODULE=config.settings_test python manage.py test --verbosity=2
 
   # ── Job 3 : Build Docker ───────────────────────────────────
   docker-build:
