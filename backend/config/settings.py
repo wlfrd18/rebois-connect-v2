@@ -123,6 +123,11 @@ AWS_SECRET_ACCESS_KEY   = os.getenv("MINIO_SECRET_KEY")
 AWS_STORAGE_BUCKET_NAME = "rebois-media"
 AWS_S3_FILE_OVERWRITE   = False
 AWS_DEFAULT_ACL         = "private"   # aucun fichier public par défaut
+# Chiffrement côté serveur AES256
+AWS_S3_OBJECT_PARAMETERS = {
+    "ServerSideEncryption": "AES256"
+}
+MINIO_PUBLIC_URL     = os.getenv("MINIO_PUBLIC_URL", "http://192.168.56.102:9000")
 
 # ── DRF ───────────────────────────────────────────────────────
 REST_FRAMEWORK = {
@@ -178,8 +183,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # ── CORS ──────────────────────────────────────────────────────
 CORS_ALLOWED_ORIGINS = [
+    "http://192.168.56.102:3000",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://192.168.56.102:3001",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001"
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -264,3 +273,4 @@ Obtenir un token : `POST /api/v1/auth/login/`
         "displayRequestDuration": True,
     },
 }
+FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://192.168.56.102:3000')
