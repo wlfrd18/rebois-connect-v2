@@ -27,7 +27,7 @@ class RegisterView(generics.CreateAPIView):
         uid   = urlsafe_base64_encode(force_bytes(user.pk))
 
         # Envoyer l'email d'activation via Celery
-	send_activation_email(str(user.id), token, uid)
+        send_activation_email(str(user.id), token, uid)
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
