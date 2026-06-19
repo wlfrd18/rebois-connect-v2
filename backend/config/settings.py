@@ -188,7 +188,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://192.168.56.102:3001",
     "http://localhost:3001",
-    "http://127.0.0.1:3001"
+    "http://127.0.0.1:3001",
+    "https://rebois-connect-v2.vercel.app",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
