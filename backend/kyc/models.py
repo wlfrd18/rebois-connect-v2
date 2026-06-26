@@ -39,6 +39,8 @@ class KYCStorage(Storage):
     def delete(self, name):
         self.client.delete_object(Bucket=self.bucket, Key=name)
 
+    def deconstruct(self):
+        return ("kyc.models.KYCStorage", [], {})
 
 def kyc_doc_path(instance, filename):
     return f"kyc/{instance.user.id}/{filename}"
