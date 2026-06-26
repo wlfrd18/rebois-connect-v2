@@ -117,7 +117,7 @@ CELERY_BEAT_SCHEDULER      = "django_celery_beat.schedulers:DatabaseScheduler"
 
 # ── Stockage MinIO ────────────────────────────────────────────
 DEFAULT_FILE_STORAGE    = "storages.backends.s3boto3.S3Boto3Storage"
-AWS_S3_ENDPOINT_URL     = f"http://{os.getenv('MINIO_ENDPOINT', 'localhost:9000')}"
+AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL", "https://s3.us-east-005.backblazeb2.com")
 AWS_ACCESS_KEY_ID       = os.getenv("MINIO_ACCESS_KEY")
 AWS_SECRET_ACCESS_KEY   = os.getenv("MINIO_SECRET_KEY")
 AWS_STORAGE_BUCKET_NAME = "rebois-media"
