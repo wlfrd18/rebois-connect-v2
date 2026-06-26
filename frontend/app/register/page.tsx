@@ -61,7 +61,7 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg p-8">
         <div className="text-center mb-6">
-          <div className="text-4xl mb-2">🌱</div>
+          <img src="/logo.png" alt="Rebois Connect" className="h-16 object-contain mx-auto mb-2" />
           <h1 className="text-2xl font-bold text-green-800">Créer un compte</h1>
           <p className="text-gray-500 text-sm mt-1">Rejoignez la communauté Rebois Connect</p>
         </div>
