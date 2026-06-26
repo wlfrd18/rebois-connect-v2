@@ -39,7 +39,7 @@ export default function EditProfilePage() {
       const data = new FormData();
       Object.entries(form).forEach(([k, v]) => data.append(k, v));
       if (avatar) data.append("avatar", avatar);
-      const r = await api.patch("/auth/me/", data, {
+      const r = await api.patch("/auth/me/update/", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setUser(r.data);
