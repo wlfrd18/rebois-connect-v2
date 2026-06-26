@@ -87,28 +87,29 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="text-green-300 text-sm">Connect</div>
         </div>
 
-        {user && (
-	  <Link href="/dashboard/profile/edit" className="px-4 py-3 border-b border-green-800 flex items-center gap-3 hover:bg-green-800 transition cursor-pointer">
-            <div className="w-10 h-10 rounded-xl bg-green-700 flex items-center justify-center font-bold text-white overflow-hidden flex-shrink-0">
-              {(user as any).avatar
-                ? <img src={(user as any).avatar.replace("http://minio:9000", "http://192.168.56.102:9000")} alt="" className="w-full h-full object-cover" />
-	        : <span>{user.first_name?.[0]?.toUpperCase() || user.username?.[0]?.toUpperCase()}</span>
-	      }
-            </div>
-            <div className="min-w-0">
-              <div className="text-sm font-medium truncate">{user.first_name || user.username}</div>
-              <div className="text-xs text-green-300">{ROLE_LABELS[user.role]}</div>
-              <span className={`text-xs mt-1 px-2 py-0.5 rounded-full inline-block ${kyc.cls}`}>
-                {kyc.label}
-              </span>
-            </div>
-          </Link>
-          <Link href={`/dashboard/profile/${user.username}`}
-            className="mx-4 mb-1 text-xs text-green-300 hover:text-white transition">
-            Voir mon profil public →
-          </Link>
-        )}
-
+{user && (
+  <div className="border-b border-green-800">
+    <Link href="/dashboard/profile/edit" className="px-4 py-3 flex items-center gap-3 hover:bg-green-800 transition cursor-pointer">
+      <div className="w-10 h-10 rounded-xl bg-green-700 flex items-center justify-center font-bold text-white overflow-hidden flex-shrink-0">
+        {(user as any).avatar
+          ? <img src={(user as any).avatar.replace("http://minio:9000", "http://192.168.56.102:9000")} alt="" className="w-full h-full object-cover" />
+          : <span>{user.first_name?.[0]?.toUpperCase() || user.username?.[0]?.toUpperCase()}</span>
+        }
+      </div>
+      <div className="min-w-0">
+        <div className="text-sm font-medium truncate">{user.first_name || user.username}</div>
+        <div className="text-xs text-green-300">{ROLE_LABELS[user.role]}</div>
+        <span className={`text-xs mt-1 px-2 py-0.5 rounded-full inline-block ${kyc.cls}`}>
+          {kyc.label}
+        </span>
+      </div>
+    </Link>
+    <Link href={`/dashboard/profile/${user.username}`}
+      className="block px-4 pb-2 text-xs text-green-400 hover:text-white transition">
+      Voir mon profil public →
+    </Link>
+  </div>
+)}
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           {links.map((link) => (
             <Link key={link.href} href={link.href}
