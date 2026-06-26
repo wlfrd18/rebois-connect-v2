@@ -154,7 +154,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <button onClick={() => setOpen(true)} className="text-white">
           <Menu size={24} />
         </button>
-        <div className="text-sm font-bold">🌱 Rebois Connect</div>
+        <img src="/logo.png" alt="Rebois Connect" className="h-7 object-contain brightness-0 invert" />
         {user && (
           <Link href={`/dashboard/profile/${user?.username}`}>
             <div className="w-8 h-8 rounded-lg bg-green-700 flex items-center justify-center font-bold text-white overflow-hidden">
