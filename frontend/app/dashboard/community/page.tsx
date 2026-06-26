@@ -102,17 +102,17 @@ export default function CommunityPage() {
 
   const typeInfo = (type: string) => POST_TYPES.find((t) => t.value === type) || POST_TYPES[0];
 
-  return (
+return (
     <DashboardLayout>
-      <div className="max-w-2xl mx-auto">
+      <div className="w-full max-w-2xl mx-auto px-2 md:px-0">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">Communauté</h1>
+            <h1 className="text-xl md:text-2xl font-bold text-gray-800">Communauté</h1>
             <p className="text-gray-500 text-sm">Partagez, apprenez, échangez</p>
           </div>
           <button
             onClick={() => setShowCreate(true)}
-            className="flex items-center gap-2 bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition"
+            className="flex items-center gap-2 bg-green-700 text-white px-3 py-2 rounded-lg hover:bg-green-800 transition text-sm"
           >
             <Plus size={16} />
             Publier
@@ -140,8 +140,8 @@ export default function CommunityPage() {
 
         {/* Modal création */}
         {showCreate && (
-          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl w-full max-w-lg p-6">
+          <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center">
+            <div className="bg-white rounded-t-2xl md:rounded-2xl w-full md:max-w-lg p-4 md:p-6 max-h-[90vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-bold text-gray-800">Nouvelle publication</h2>
                 <button onClick={() => setShowCreate(false)}><X size={20} className="text-gray-400" /></button>
@@ -161,19 +161,18 @@ export default function CommunityPage() {
                 <input
                   value={form.title} onChange={(e) => setForm((p) => ({ ...p, title: e.target.value }))}
                   placeholder="Titre (optionnel)"
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <textarea
                   value={form.content} onChange={(e) => setForm((p) => ({ ...p, content: e.target.value }))}
                   placeholder="Qu'est-ce que vous souhaitez partager ?" rows={4} required
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <input
                   value={form.link_url} onChange={(e) => setForm((p) => ({ ...p, link_url: e.target.value }))}
                   placeholder="Lien (optionnel)"
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
-		{/* Upload média */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Fichier (image, vidéo, audio)
@@ -209,13 +208,13 @@ export default function CommunityPage() {
                     </div>
                   )}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 pb-2">
                   <button type="button" onClick={() => setShowCreate(false)}
-                    className="flex-1 border border-gray-200 text-gray-600 py-2 rounded-lg text-sm hover:bg-gray-50">
+                    className="flex-1 border border-gray-200 text-gray-600 py-3 rounded-lg text-sm hover:bg-gray-50">
                     Annuler
                   </button>
                   <button type="submit"
-                    className="flex-1 bg-green-700 text-white py-2 rounded-lg text-sm hover:bg-green-800">
+                    className="flex-1 bg-green-700 text-white py-3 rounded-lg text-sm hover:bg-green-800">
                     Publier
                   </button>
                 </div>
@@ -238,52 +237,46 @@ export default function CommunityPage() {
               const type = typeInfo(post.post_type);
               return (
                 <div key={post.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                  {/* Header */}
                   <div className="p-4 pb-0 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center font-bold text-green-700">
+                      <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center font-bold text-green-700 flex-shrink-0">
                         {post.author_username?.[0]?.toUpperCase()}
                       </div>
-                      <div>
-                        <div className="font-medium text-sm text-gray-800">{post.author_username}</div>
+                      <div className="min-w-0">
+                        <div className="font-medium text-sm text-gray-800 truncate">{post.author_username}</div>
                         <div className="text-xs text-gray-400">
                           {ROLE_LABELS[post.author_role]} · {new Date(post.created_at).toLocaleDateString("fr-FR")}
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className={`text-xs px-2 py-1 rounded-full ${type.color}`}>
+                    <div className="flex items-center gap-1 flex-shrink-0">
+                      <span className={`text-xs px-2 py-1 rounded-full ${type.color} hidden sm:inline-block`}>
                         {type.emoji} {type.label}
                       </span>
+                      <span className="text-lg sm:hidden">{type.emoji}</span>
                       {(post.author === user?.id || user?.role === "admin") && (
-                        <button onClick={() => handleDelete(post.id)} className="text-gray-300 hover:text-red-500 transition">
+                        <button onClick={() => handleDelete(post.id)} className="text-gray-300 hover:text-red-500 transition ml-1">
                           <Trash2 size={14} />
                         </button>
                       )}
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className="p-4">
                     {post.title && <div className="font-semibold text-gray-800 mb-1">{post.title}</div>}
                     <p className="text-gray-700 text-sm leading-relaxed">{post.content}</p>
-		    {post.image_url && (
-                      <img
-                        src={post.image_url}
-                        alt="media"
-                        className="mt-3 rounded-xl w-full max-h-64 object-cover"
-                      />
+                    {post.image_url && (
+                      <img src={post.image_url} alt="media" className="mt-3 rounded-xl w-full max-h-64 object-cover" />
                     )}
                     {post.link_url && (
                       <a href={post.link_url} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-2 mt-2 text-xs text-green-700 hover:underline">
-                        <Link size={12} />
+                        className="flex items-center gap-2 mt-2 text-xs text-green-700 hover:underline break-all">
+                        <Link size={12} className="flex-shrink-0" />
                         {post.link_url}
                       </a>
                     )}
                   </div>
 
-                  {/* Actions */}
                   <div className="px-4 pb-3 flex items-center gap-4 border-t border-gray-50 pt-3">
                     <button
                       onClick={() => handleLike(post.id)}
@@ -301,18 +294,17 @@ export default function CommunityPage() {
                     </button>
                   </div>
 
-                  {/* Comments */}
                   {expandedComments === post.id && (
                     <div className="px-4 pb-4 border-t border-gray-50">
                       <div className="space-y-2 mt-3 max-h-48 overflow-y-auto">
                         {(comments[post.id] || []).map((c) => (
                           <div key={c.id} className="flex gap-2">
-                            <div className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-600">
+                            <div className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-600 flex-shrink-0">
                               {c.author_username?.[0]?.toUpperCase()}
                             </div>
-                            <div className="flex-1 bg-gray-50 rounded-lg px-3 py-2">
+                            <div className="flex-1 bg-gray-50 rounded-lg px-3 py-2 min-w-0">
                               <div className="text-xs font-medium text-gray-700">{c.author_username}</div>
-                              <div className="text-xs text-gray-600">{c.content}</div>
+                              <div className="text-xs text-gray-600 break-words">{c.content}</div>
                             </div>
                           </div>
                         ))}
@@ -322,12 +314,12 @@ export default function CommunityPage() {
                           value={commentText}
                           onChange={(e) => setCommentText(e.target.value)}
                           placeholder="Votre commentaire..."
-                          className="flex-1 border border-gray-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-green-500"
+                          className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500"
                           onKeyDown={(e) => e.key === "Enter" && handleComment(post.id)}
                         />
                         <button
                           onClick={() => handleComment(post.id)}
-                          className="bg-green-700 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-green-800"
+                          className="bg-green-700 text-white px-3 py-2 rounded-lg text-xs hover:bg-green-800"
                         >
                           Envoyer
                         </button>
