@@ -78,8 +78,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Logo */}
       <div className="p-5 border-b border-green-800 flex items-center justify-between">
         <div>
-          <div className="text-xl font-bold text-white">🌱 Rebois</div>
-          <div className="text-green-300 text-xs">Connect</div>
+          <img src="/logo.png" alt="Rebois Connect" className="h-10 object-contain brightness-0 invert" />
         </div>
         <button onClick={() => setOpen(false)} className="md:hidden text-green-300 hover:text-white">
           <X size={20} />
