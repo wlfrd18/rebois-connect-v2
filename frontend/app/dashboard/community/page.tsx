@@ -266,7 +266,21 @@ return (
                     {post.title && <div className="font-semibold text-gray-800 mb-1">{post.title}</div>}
                     <p className="text-gray-700 text-sm leading-relaxed">{post.content}</p>
                     {post.image_url && (
-                      <img src={post.image_url} alt="media" className="mt-3 rounded-xl w-full max-h-64 object-cover" />
+                      <div className="mt-3 rounded-xl overflow-hidden bg-gray-100">
+                        <img
+                          src={post.image_url}
+                          alt="media"
+                          className="w-full object-cover"
+                          style={{ maxHeight: "500px" }}
+                          onLoad={(e) => {
+                            const img = e.currentTarget;
+                            const ratio = img.naturalHeight / img.naturalWidth;
+                            if (ratio < 0.5) img.style.maxHeight = "300px";
+                            else if (ratio > 1.5) img.style.maxHeight = "600px";
+                            else img.style.maxHeight = "500px";
+                          }}
+                        />
+                      </div>
                     )}
                     {post.link_url && (
                       <a href={post.link_url} target="_blank" rel="noopener noreferrer"
