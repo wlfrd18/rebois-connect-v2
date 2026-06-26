@@ -17,21 +17,24 @@ const NAV_LINKS: Record<string, { href: string; label: string; icon: React.React
     { href: "/dashboard/volontaire/contracts",     label: "Mes contrats",      icon: <FileText size={18} /> },
     { href: "/dashboard/community",                label: "Communauté",        icon: <Globe size={18} /> },
     { href: "/dashboard/messages",                 label: "Messages",          icon: <MessageSquare size={18} /> },
-  ],
+    { href: "/dashboard/members", label: "Membres", icon: <Users size={18} /> },  
+],
   mecene: [
     { href: "/dashboard/mecene",                   label: "Marketplace",       icon: <TreePine size={18} /> },
     { href: "/dashboard/mecene/certificates",      label: "Certificats CO₂",  icon: <Award size={18} /> },
     { href: "/dashboard/kyc",                      label: "Mon KYC",           icon: <ShieldCheck size={18} /> },
     { href: "/dashboard/community",                label: "Communauté",        icon: <Globe size={18} /> },
     { href: "/dashboard/messages",                 label: "Messages",          icon: <MessageSquare size={18} /> },
-  ],
+    { href: "/dashboard/members", label: "Membres", icon: <Users size={18} /> },  
+],
   structure: [
     { href: "/dashboard/structure",                label: "Vue d'ensemble",    icon: <LayoutDashboard size={18} /> },
     { href: "/dashboard/structure/missions",       label: "Mes missions",      icon: <CheckSquare size={18} /> },
     { href: "/dashboard/kyc",                      label: "Mon KYC",           icon: <ShieldCheck size={18} /> },
     { href: "/dashboard/community",                label: "Communauté",        icon: <Globe size={18} /> },
     { href: "/dashboard/messages",                 label: "Messages",          icon: <MessageSquare size={18} /> },
-  ],
+    { href: "/dashboard/members", label: "Membres", icon: <Users size={18} /> },  
+],
   admin: [
     { href: "/dashboard/admin",                    label: "Vue d'ensemble",    icon: <LayoutDashboard size={18} /> },
     { href: "/dashboard/admin/proposals",          label: "Terrains",          icon: <Map size={18} /> },
@@ -39,7 +42,8 @@ const NAV_LINKS: Record<string, { href: string; label: string; icon: React.React
     { href: "/dashboard/admin/users",              label: "Utilisateurs",      icon: <Users size={18} /> },
     { href: "/dashboard/community",                label: "Communauté",        icon: <Globe size={18} /> },
     { href: "/dashboard/messages",                 label: "Messages",          icon: <MessageSquare size={18} /> },
-  ],
+    { href: "/dashboard/members", label: "Membres", icon: <Users size={18} /> },  
+],
 };
 
 const ROLE_LABELS: Record<string, string> = {
