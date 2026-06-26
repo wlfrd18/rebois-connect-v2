@@ -14,6 +14,8 @@ interface User {
   kyc_status: string;
   first_name: string;
   last_name: string;
+  avatar?: string;
+  bio?: string;
 }
 
 interface AuthStore {

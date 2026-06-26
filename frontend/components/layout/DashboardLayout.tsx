@@ -90,10 +90,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {user && (
 	  <Link href="/dashboard/profile/edit" className="px-4 py-3 border-b border-green-800 flex items-center gap-3 hover:bg-green-800 transition cursor-pointer">
             <div className="w-10 h-10 rounded-xl bg-green-700 flex items-center justify-center font-bold text-white overflow-hidden flex-shrink-0">
-              {user.avatar
-              ? <img src={user.avatar.replace("http://minio:9000", "http://192.168.56.102:9000")} alt="" className="w-full h-full object-cover" />
-              : <span>{user.first_name?.[0]?.toUpperCase() || user.username?.[0]?.toUpperCase()}</span>
-              }
+              {(user as any).avatar
+                ? <img src={(user as any).avatar.replace("http://minio:9000", "http://192.168.56.102:9000")} alt="" className="w-full h-full object-cover" />
+	        : <span>{user.first_name?.[0]?.toUpperCase() || user.username?.[0]?.toUpperCase()}</span>
+	      }
             </div>
             <div className="min-w-0">
               <div className="text-sm font-medium truncate">{user.first_name || user.username}</div>
