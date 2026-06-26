@@ -103,6 +103,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               </span>
             </div>
           </Link>
+          <Link href={`/dashboard/profile/${user.username}`}
+            className="mx-4 mb-1 text-xs text-green-300 hover:text-white transition">
+            Voir mon profil public →
+          </Link>
         )}
 
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
