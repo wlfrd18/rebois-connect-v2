@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authApi } from "@/lib/api";
 import Link from "next/link";
+import { Sprout, TrendingUp, Building2 } from "lucide-react"
 
 const schema = z.object({
   email:               z.string().email("Email invalide"),
@@ -26,9 +27,9 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const ROLES = [
-  { value: "volontaire", label: "Volontaire", desc: "Je possède un terrain à reboiser", icon: "🌳" },
-  { value: "mecene",     label: "Mécène",     desc: "Je finance des projets de reforestation", icon: "💚" },
-  { value: "structure",  label: "Structure technique", desc: "Je réalise des travaux de reforestation", icon: "🏗️" },
+  { value: "volontaire", label: "Volontaire",          desc: "Je possède un terrain à reboiser",         icon: "sprout" },
+  { value: "mecene",     label: "Mécène",              desc: "Je finance des projets de reforestation",  icon: "trending" },
+  { value: "structure",  label: "Structure technique", desc: "Je réalise des travaux de reforestation",  icon: "building" },
 ];
 
 export default function RegisterPage() {
@@ -74,7 +75,11 @@ export default function RegisterPage() {
               {ROLES.map((r) => (
                 <label key={r.value} className={`flex items-center gap-3 border-2 rounded-lg p-3 cursor-pointer transition ${selectedRole === r.value ? "border-green-500 bg-green-50" : "border-gray-200 hover:border-green-300"}`}>
                   <input {...register("role")} type="radio" value={r.value} className="hidden" />
-                  <span className="text-2xl">{r.icon}</span>
+                  <span className="text-green-700">
+                    {r.icon === "sprout"   && <Sprout size={22} />}
+                    {r.icon === "trending" && <TrendingUp size={22} />}
+                    {r.icon === "building" && <Building2 size={22} />}
+                  </span>
                   <div>
                     <div className="font-medium text-gray-800">{r.label}</div>
                     <div className="text-xs text-gray-500">{r.desc}</div>

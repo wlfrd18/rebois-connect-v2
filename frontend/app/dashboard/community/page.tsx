@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { api } from "@/lib/api";
 import { useAuthStore } from "@/store/authStore";
-import { Heart, MessageCircle, Share2, Plus, X, Image, Link, Trash2 } from "lucide-react";
+import { Heart, MessageCircle, Share2, Plus, X, Image, Link, Trash2, Link2, Lightbulb, BookOpen, Megaphone, Globe, Paperclip } from "lucide-react";
 
 const POST_TYPES = [
-  { value: "partage",    label: "Partage",    emoji: "🔗", color: "bg-blue-100 text-blue-700" },
-  { value: "astuce",     label: "Astuce",     emoji: "💡", color: "bg-yellow-100 text-yellow-700" },
-  { value: "formation",  label: "Formation",  emoji: "📚", color: "bg-purple-100 text-purple-700" },
-  { value: "annonce",    label: "Annonce",    emoji: "📣", color: "bg-red-100 text-red-700" },
-  { value: "actualite",  label: "Actualité",  emoji: "🌍", color: "bg-green-100 text-green-700" },
+  { value: "partage",   label: "Partage",   icon: <Link2 size={14} />,      color: "bg-blue-100 text-blue-700" },
+  { value: "astuce",    label: "Astuce",    icon: <Lightbulb size={14} />,  color: "bg-yellow-100 text-yellow-700" },
+  { value: "formation", label: "Formation", icon: <BookOpen size={14} />,   color: "bg-purple-100 text-purple-700" },
+  { value: "annonce",   label: "Annonce",   icon: <Megaphone size={14} />,  color: "bg-red-100 text-red-700" },
+  { value: "actualite", label: "Actualité", icon: <Globe size={14} />,      color: "bg-green-100 text-green-700" },
 ];
 
 const ROLE_LABELS: Record<string, string> = {
@@ -133,7 +133,7 @@ return (
               onClick={() => setFilter(t.value)}
               className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition ${filter === t.value ? "bg-green-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
             >
-              {t.emoji} {t.label}
+              {t.icon} {t.label}
             </button>
           ))}
         </div>
@@ -154,7 +154,7 @@ return (
                       onClick={() => setForm((p) => ({ ...p, post_type: t.value }))}
                       className={`px-3 py-1.5 rounded-full text-sm transition ${form.post_type === t.value ? "bg-green-700 text-white" : t.color}`}
                     >
-                      {t.emoji} {t.label}
+                      {t.icon} {t.label}
                     </button>
                   ))}
                 </div>
@@ -194,7 +194,7 @@ return (
                         }
                       }}
                     />
-                    <span className="text-2xl">📎</span>
+                    <Paperclip size={18} className="text-gray-400 flex-shrink-0" />
                     <span className="text-sm text-gray-500">
                       {mediaFile ? mediaFile.name : "Cliquez pour ajouter un fichier"}
                     </span>
@@ -251,9 +251,9 @@ return (
                     </div>
                     <div className="flex items-center gap-1 flex-shrink-0">
                       <span className={`text-xs px-2 py-1 rounded-full ${type.color} hidden sm:inline-block`}>
-                        {type.emoji} {type.label}
+                        {type.icon} {type.label}
                       </span>
-                      <span className="text-lg sm:hidden">{type.emoji}</span>
+                      <span className="text-lg sm:hidden">{type.icon}</span>
                       {(post.author === user?.id || user?.role === "admin") && (
                         <button onClick={() => handleDelete(post.id)} className="text-gray-300 hover:text-red-500 transition ml-1">
                           <Trash2 size={14} />

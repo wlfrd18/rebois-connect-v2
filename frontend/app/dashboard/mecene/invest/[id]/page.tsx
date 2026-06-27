@@ -127,7 +127,7 @@ export default function InvestPage() {
                 <div><span className="text-gray-500">Montant :</span> <span className="font-bold text-green-700">{amount}€</span></div>
                 <div><span className="text-gray-500">Référence :</span> <span className="font-mono font-medium">RC-{id.slice(0, 8).toUpperCase()}</span></div>
               </div>
-              <p className="text-xs text-gray-400">⚠️ Indiquez la référence dans le libellé de votre virement pour que nous puissions l'identifier.</p>
+              <p className="text-xs text-gray-400">Indiquez la référence dans le libellé de votre virement pour que nous puissions l'identifier.</p>
               <button onClick={() => setStep("proof")}
                 className="w-full bg-green-700 text-white py-2 rounded-lg hover:bg-green-800 transition">
                 J'ai effectué le virement →

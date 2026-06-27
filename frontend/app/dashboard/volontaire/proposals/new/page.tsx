@@ -222,7 +222,7 @@ export default function NewProposalPage() {
                   setPhotos(files);
                 }}
               />
-              <span className="text-2xl">📷</span>
+              <Camera size={20} className="text-gray-400" />
               <span className="text-sm text-gray-500">
                 {photos.length > 0 ? `${photos.length} photo(s) sélectionnée(s)` : "Cliquez pour ajouter des photos"}
               </span>
@@ -238,7 +238,7 @@ export default function NewProposalPage() {
               </div>
             )}
             {photos.length === 1 && (
-              <p className="text-orange-500 text-xs mt-1">⚠️ Minimum 2 photos requises</p>
+              <p className="text-orange-500 text-xs mt-1">Minimum 2 photos requises</p>
             )}
           </div>
 
@@ -252,7 +252,7 @@ export default function NewProposalPage() {
                 type="file" accept=".pdf,.jpg,.jpeg,.png" className="hidden"
                 onChange={(e) => setOwnerDoc(e.target.files?.[0] || null)}
               />
-              <span className="text-2xl">📄</span>
+              <FileText size={20} className="text-gray-400" />
               <span className="text-sm text-gray-500">
                 {ownerDoc ? ownerDoc.name : "PDF, JPG ou PNG — Max 5MB"}
               </span>

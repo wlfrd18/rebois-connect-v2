@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { CheckCircle, XCircle } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import Link from "next/link";
@@ -28,7 +29,7 @@ export default function ActivatePage() {
 
         {status === "success" && (
           <>
-            <div className="text-5xl mb-4">✅</div>
+            <CheckCircle size={48} className="mx-auto mb-4 text-green-600" />
             <h2 className="text-xl font-bold text-gray-800 mb-2">Compte activé !</h2>
             <p className="text-gray-500 mb-6">{message}</p>
             <Link href="/login"
@@ -40,7 +41,7 @@ export default function ActivatePage() {
 
         {status === "error" && (
           <>
-            <div className="text-5xl mb-4">❌</div>
+            <XCircle size={48} className="mx-auto mb-4 text-red-500" />
             <h2 className="text-xl font-bold text-gray-800 mb-2">Lien invalide</h2>
             <p className="text-gray-500 mb-6">{message}</p>
             <Link href="/register"
