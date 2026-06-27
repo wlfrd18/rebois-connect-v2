@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { authApi } from "@/lib/api";
 import { useAuthStore } from "@/store/authStore";
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 
 const schema = z.object({
   email:    z.string().email("Email invalide"),
@@ -77,7 +78,7 @@ export default function LoginPage() {
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
              >
-              {showPassword ? "🙈" : "👁️"}
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
 
