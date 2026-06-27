@@ -50,7 +50,13 @@ export default function CommunityPage() {
     try {
       const data = new FormData();
       Object.entries(form).forEach(([k, v]) => v && data.append(k, v));
-      if (mediaFile) data.append("image", mediaFile);
+      if (mediaFile) {
+        if (mediaFile.type.startsWith("video/")) {
+          data.append("video", mediaFile);
+        } else {
+          data.append("image", mediaFile);
+        }
+      }
       const r = await api.post("/gamification/posts/", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -279,6 +285,17 @@ return (
                             else if (ratio > 1.5) img.style.maxHeight = "600px";
                             else img.style.maxHeight = "500px";
                           }}
+                        />
+                      </div>
+                    )}
+
+		    {post.video_url && (
+                      <div className="mt-3 rounded-xl overflow-hidden bg-gray-900">
+                        <video
+                          src={post.video_url}
+                          controls
+                          className="w-full max-h-96"
+                          preload="metadata"
                         />
                       </div>
                     )}

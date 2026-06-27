@@ -18,6 +18,7 @@ class Post(models.Model):
     title      = models.CharField(max_length=200, blank=True)
     content    = models.TextField()
     image     = models.ImageField(upload_to="posts/images/", null=True, blank=True)
+    video = models.FileField(upload_to="posts/videos/", null=True, blank=True)
     media_file = models.FileField(upload_to="posts/media/", null=True, blank=True)
     link_url   = models.URLField(blank=True)
     link_title = models.CharField(max_length=200, blank=True)

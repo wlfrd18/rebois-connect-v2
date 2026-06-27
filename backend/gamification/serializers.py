@@ -20,12 +20,13 @@ class PostSerializer(serializers.ModelSerializer):
     post_type_display = serializers.CharField(source="get_post_type_display", read_only=True)
     is_liked_by_me    = serializers.SerializerMethodField()
     image_url         = serializers.SerializerMethodField()
+    video_url = serializers.SerializerMethodField()
 
     class Meta:
         model  = Post
         fields = ("id", "author", "author_username", "author_role",
                   "post_type", "post_type_display", "title", "content",
-                  "image", "image_url", "link_url", "link_title",
+                  "image", "image_url", "video", "video_url", "link_url", "link_title",
                   "likes_count", "comments_count", "is_liked_by_me",
                   "is_active", "created_at")
         read_only_fields = ("id", "author", "is_active", "created_at")
@@ -49,6 +50,11 @@ class PostSerializer(serializers.ModelSerializer):
             return obj.likes.filter(user=request.user).exists()
         return False
 
+    def get_video_url(self, obj):
+        if not obj.video:
+            return None
+        url = obj.video.url
+        return url.replace("http://minio:9000", "http://192.168.56.102:9000")
 
 class MessageSerializer(serializers.ModelSerializer):
     sender_username    = serializers.CharField(source="sender.username", read_only=True)
