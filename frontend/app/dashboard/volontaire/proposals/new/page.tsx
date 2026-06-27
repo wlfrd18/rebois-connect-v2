@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { proposalsApi } from "@/lib/api";
-import { Cloud, Thermometer, Wind, Droplets, Search } from "lucide-react";
+import { Cloud, Thermometer, Wind, Droplets, Search, Camera, FileText } from "lucide-react";
 
 const LAND_TYPES = [
   { value: "degraded_forest", label: "Forêt dégradée" },
