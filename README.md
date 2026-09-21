@@ -64,7 +64,7 @@ Chaque projet est tracé de bout en bout : soumission du terrain, validation KYC
 
 ## Architecture
 
-![Architecture Rebois Connect](rebois_connect_architecture_v3.png)
+![Architecture Rebois Connect v2](docs/rebois_connect_architecture_v3.png)
 
 ### Stack technique
 
