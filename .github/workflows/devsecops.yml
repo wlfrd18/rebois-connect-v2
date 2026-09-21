@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  # ── Job 1 : Analyse statique sécurité ─────────────────────
+  # Job 1 : Analyse statique sécurité 
   security-scan:
     name: Security Scan
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
           name: bandit-security-report
           path: bandit-report.json
 
-  # ── Job 2 : Tests Django ───────────────────────────────────
+  # Job 2 : Tests Django 
   test:
     name: Django Tests
     runs-on: ubuntu-latest
@@ -115,7 +115,7 @@ jobs:
           cd backend
           DJANGO_SETTINGS_MODULE=config.settings_test python manage.py test --verbosity=2
 
-  # ── Job 3 : Build Docker ───────────────────────────────────
+  # Job 3 : Build Docker 
   docker-build:
     name: Docker Build Check
     runs-on: ubuntu-latest
@@ -142,7 +142,7 @@ jobs:
           severity: CRITICAL,HIGH
           exit-code: 0
 
-  # ── Job 4 : Résumé sécurité ────────────────────────────────
+  # Job 4 : Résumé sécurité 
   security-summary:
     name: Security Summary
     runs-on: ubuntu-latest
