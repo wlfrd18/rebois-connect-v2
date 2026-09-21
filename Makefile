@@ -23,3 +23,4 @@ createsuperuser:
 
 ps:
 	docker compose ps
+
