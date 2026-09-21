@@ -1,6 +1,6 @@
 services:
 
-  # ── Base de données principale ─────────────────────────────
+  # Base de données principale 
   postgres:
     image: postgres:16-alpine
     container_name: rebois_postgres
@@ -19,7 +19,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # ── Cache + Broker Celery ──────────────────────────────────
+  # Cache + Broker Celery
   redis:
     image: redis:7-alpine
     container_name: rebois_redis
@@ -35,7 +35,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # ── Stockage fichiers (S3-compatible) ─────────────────────
+  # Stockage fichiers (S3-compatible)
   minio:
     image: minio/minio:latest
     container_name: rebois_minio
@@ -55,7 +55,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # ── Backend Django (HTTP REST) ─────────────────────────────
+  # Backend Django (HTTP REST) 
   backend:
     build:
       context: ./backend
@@ -93,7 +93,7 @@ services:
              python manage.py collectstatic --noinput &&
              gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4"
 
-  # ── Daphne (WebSocket temps réel) ─────────────────────────
+  # Daphne (WebSocket temps réel)
   daphne:
     build:
       context: ./backend
@@ -116,7 +116,7 @@ services:
       - backend
     command: daphne -b 0.0.0.0 -p 8001 config.asgi:application
 
-  # ── Celery Worker (tâches async) ──────────────────────────
+  # Celery Worker (tâches async)
   celery:
     build:
       context: ./backend
@@ -141,7 +141,7 @@ services:
       - redis
     command: celery -A config worker --loglevel=info --concurrency=4
 
-  # ── Celery Beat (tâches périodiques) ──────────────────────
+  # Celery Beat (tâches périodiques) 
   celery-beat:
     build:
       context: ./backend
@@ -162,7 +162,7 @@ services:
       - celery
     command: celery -A config beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 
-  # ── Frontend Next.js ───────────────────────────────────────
+  # Frontend Next.js 
   frontend:
     build:
       context: ./frontend
